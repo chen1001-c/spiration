@@ -78,19 +78,19 @@ Docker 在容器的基础上，进行了进一步的封装，从文件系统、�
 —镜像常用命令
 
 ```
-docker images        　											//查看镜像
-docker search　文件名　 　 										//搜索镜像
-docker pull    文件名　　　										//下载镜像
-docker push　　文件名　　 											//上传镜像
-docker load < 文件名.tar  						//导入镜像文件（格式为.tar)　例：docker load <nginx.tar
-docker save image_name > xx.tar  		 //导出镜像包，镜像名可以docker images查看，REPOSITORY下面名字
-docker run -it 镜像名称：镜像标签　启动命令　　		//启动运行镜像　例：docker run -it night:night01 bash
+docker images        　											// 查看镜像
+docker search　文件名　 　 										// 搜索镜像
+docker pull    文件名　　　										// 下载镜像
+docker push　　文件名　　 											// 上传镜像
+docker load < 文件名.tar  				   // 导入镜像文件（格式为.tar)　例：docker load <nginx.tar
+docker save image_name > xx.tar  		  // 导出镜像包，镜像名可以docker images查看，REPOSITORY下面名字
+docker run -it 镜像名称：镜像标签　启动命令　// 启动运行镜像　例：docker run -it night:night01 bash
 //-i 表示交互　-t表示终端
-例：docker run -it centos /usr/bin/python 						//只要可以执行的命令都可以
+例：docker run -it centos /usr/bin/python 						// 只要可以执行的命令都可以
 [root@docker_1 ~]# docker run -it centos /bin/ls
 anaconda-post.log  dev home  lib64  mnt  proc run   srv  tmp var
 bin   etc lib   media  opt  root sbin  sys  usr
-docker tag 														//修改镜像名称和标签
+docker tag 														// 修改镜像名称和标签
 ```
 
 docker inspect  镜像名称：镜像标签　// 获取容器/镜像的元数据。主要查看CMD后面的命令
@@ -102,10 +102,10 @@ docker inspect  镜像名称：镜像标签　// 获取容器/镜像的元数据
                 "CMD [\"nginx\" \"-g\" \"daemon off;\"]"
 
 ```
-docker ps　									       	//  查看已开启的容器加　-a 查看所有容器
-docker history 镜像名　							    	//查看镜像制作历叱
-docker rmi 镜像名　								     	//删除本地镜像
-docker save　镜像名 > 文件名.tar　　 					 //镜像另存为tar包
+docker ps　									       	  // 查看已开启的容器加　-a 查看所有容器
+docker history 镜像名　							    	// 查看镜像制作历叱
+docker rmi 镜像名　								     	// 删除本地镜像
+docker save　镜像名 > 文件名.tar　　 					 // 镜像另存为tar包
 ```
 
 —容器常用命令
@@ -119,20 +119,20 @@ docker run //运行容器
 //注意：启用一个有交互式的进程又要放后台进程用-itd , 单纯无交互放后台直接-d即可
 
 ```
-docker ps 					//查看容器列表　没加-a表示正在运行的容器　加-a查看所有容器　-q查看ＩＤ号
-docker stop 				//关闭容器
+docker ps 					// 查看容器列表　没加-a表示正在运行的容器　加-a查看所有容器　-q查看ＩＤ号
+docker stop 				// 关闭容器
 [root@docker_1 docker]# docker stop $(docker ps -q) //停用全部运行中的容器
-docker start 				//启动容器
-docker restart 				//重启容器
-docker attach|exec 			//进入容器　退出挂后台要用ＣＴＲＬ＋Ｐ+Ｑ
-docker inspect 				//查看容器底层信息 常用于查看服务ＩＰ和端口
-docker top 					//查看容器进程列表　相当于在容器里执行ps查看这个容器的进程
+docker start 				// 启动容器
+docker restart 				// 重启容器
+docker attach|exec 			// 进入容器　退出挂后台要用ＣＴＲＬ＋Ｐ+Ｑ
+docker inspect 				// 查看容器底层信息 常用于查看服务ＩＰ和端口
+docker top 					// 查看容器进程列表　相当于在容器里执行ps查看这个容器的进程
 //容器的进程在运行它的物理机上可以查看到，隔离性没有ＫＶＭ那么好
-docker rm 					//删除容器
-[root@docker_1 docker]# docker rm $(docker ps -qa)  			//删除所有容器
+docker rm 					// 删除容器
+[root@docker_1 docker]# docker rm $(docker ps -qa)  			// 删除所有容器
 [root@docker_1 docker]# docker stop $(docker ps -q) & docker rm $(docker ps -aq)
-docker exec -it 　容器ＩＤ　 								//进入容器　建议用这个连接容器，exit退出后
-[root@docker_1 docker]# docker exec -it 19c535ae17b3 bash　		//要加命令
+docker exec -it 　容器ＩＤ　 								// 进入容器　建议用这个连接容器，exit退出后
+[root@docker_1 docker]# docker exec -it 19c535ae17b3 bash　		// 要加命令
 [root@docker_1 ~]# docker run -d -p 80:80 nginx 
 ```
 
@@ -199,15 +199,15 @@ Centos7.6
          docker rm -f web1
        改：
           容器重命名
-          docker rename       修改容器名字
+          docker rename                  \\ 修改容器名字
           容器启动和停止
-          docker  start/stop/restart  容器名
-          docker  pause      容器名     \\暂停容器
-          docker  unpause    容器名      \\取消暂停容器
-          docker  update                \\更新容器的配置
-          docker  cp                    \\容器和宿主机之间复制文件，默认覆盖已有的文件
-          docker  exec                  \\在运行的容器中执行一条命令
-          docker  exec -it  web1 /bin/bash  \\以交互的方式进入web1容器操作
+          docker  start/stop/restart      \\ 容器名
+          docker  pause      容器名        \\ 暂停容器
+          docker  unpause    容器名         \\ 取消暂停容器
+          docker  update                   \\ 更新容器的配置
+          docker  cp                        \\ 容器和宿主机之间复制文件，默认覆盖已有的文件
+          docker  exec                      \\ 在运行的容器中执行一条命令
+          docker  exec -it  web1 /bin/bash  \\ 以交互的方式进入web1容器操作
 
 
        查：
@@ -215,13 +215,10 @@ Centos7.6
           docker ps
           查看所有的容器
           docker ps -a
-          docker stats 容器名  \\查看容器运行状态（CPU\内存\网络IO\磁盘IO使用情况）
-          docker top  容器名   \\查看容器正在运行的进程
-          docker inspect 容器/镜像   \\查看容器或者镜像的底层信息，元数据，比如查看ip、主机名、数据卷、CMD等信息
-          docker logs [-f]   \\查看容器内部进程的日志
-
-
-​          
+          docker stats 容器名       \\ 查看容器运行状态（CPU\内存\网络IO\磁盘IO使用情况）
+          docker top  容器名        \\ 查看容器正在运行的进程
+          docker inspect 容器/镜像   \\ 查看容器或者镜像的底层信息，元数据，比如查看ip、主机名、数据卷、CMD等信息
+          docker logs [-f]          \\ 查看容器内部进程的日志
 ```
 
 构建镜像：
@@ -240,11 +237,11 @@ yum -y install bash-completion-extras.noarch pletion
 
 ```
 数据卷的增删改查
-docker volume create 卷名    //创建一个数据卷
-						 ls				   	//查看已有的数据卷
-						 rm 				 //删除一个或多个数据卷
-						 prune				 //删除所有未被使用的数据卷
-						 inspect		 	  //显示一个或者多个卷的详细信息
+docker volume create 卷名                       // 创建一个数据卷
+						 ls				   	// 查看已有的数据卷
+						 rm 				 // 删除一个或多个数据卷
+						 prune				 // 删除所有未被使用的数据卷
+						 inspect		 	  // 显示一个或者多个卷的详细信息
 默认创建的数据卷放在：/var/lib/docker/volume
 数据卷的服务对象是容器，当容器创建的时候可以指定挂在那个卷
 docker run --name wed1 -d -p 80:80  -v html:/usr/share/nginx/html  10.30.5.120/docker/nginx
@@ -268,11 +265,11 @@ Docker部署wordpress
 
 ```
 mysql镜像内置变量
-    WORDPRESS_DB_HOST							//MySQL数据库主机IP地址
-    WORDPRESS_DB_PORT							//MySQL服务的端口
-    WORDPRESS_DB_NAME							//数据库名字
-    WORDPRESS_DB_PASSWORD                  //数据库密码
-    WORDPRESS_DB_DATABASE					//创建数据库名
+    WORDPRESS_DB_HOST							// MySQL数据库主机IP地址
+    WORDPRESS_DB_PORT							// MySQL服务的端口
+    WORDPRESS_DB_NAME							// 数据库名字
+    WORDPRESS_DB_PASSWORD                         // 数据库密码
+    WORDPRESS_DB_DATABASE					    // 创建数据库名
 ```
 
 创建MySQL容器
@@ -289,11 +286,11 @@ docker run --name mysql -d -p 3306:3306 -v data:/var/lib/mysql  \
 
 ```
 wordpress镜像内置的变量
-	WORDPRESS_DB_HOST            \\MySQL数据库主机ip地址
-	WORDPRESS_DB_PORT				\\Mysql服务的端口
-	WORDPRESS_DB_NAME				\\数据库的名字
-	WORDPRESS_DB_USER               \\登录MySQL的用户
-	WORDPRESS_DB_PASSWORD            \\登录用户密码
+	WORDPRESS_DB_HOST                 // MySQL数据库主机ip地址
+	WORDPRESS_DB_PORT				// Mysql服务的端口
+	WORDPRESS_DB_NAME				// 数据库的名字
+	WORDPRESS_DB_USER                // 登录MySQL的用户
+	WORDPRESS_DB_PASSWORD            // 登录用户密码
 ```
 
 ```

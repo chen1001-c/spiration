@@ -1,6 +1,9 @@
-上传harbor包
+## harbor安装
 
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1576291512093.png" alt="1576291512093"  />
+```
+上传harbor包
+harbor-offline- installer-v1.8.1. tgz 
+```
 
 ```
 解压harbor
@@ -14,13 +17,16 @@
 	cd /usr/local/harbor
 ```
 
+```
 修改hostname
+vim harbor.yml
+hostname: 10.0.0.71   ---> 本机ip
+```
 
-![1576291728870](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1576291728870.png)
-
+```
 修改harbor密码
-
-![1576291780022](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1576291780022.png)
+harbor_ admin_ password: admin
+```
 
 ```
 环境监测
